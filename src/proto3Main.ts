@@ -48,7 +48,7 @@ export function activate(ctx: vscode.ExtensionContext): void {
     }));
 
     ctx.subscriptions.push(
-        vscode.commands.registerCommand('proto3.explore', () => {
+        vscode.commands.registerCommand('proto3.explore', async () => {
             // Create and show a new webview
             const panel = vscode.window.createWebviewPanel(
                 'schemaExplorer', // Identifies the type of the webview. Used internally
@@ -56,8 +56,11 @@ export function activate(ctx: vscode.ExtensionContext): void {
                 vscode.ViewColumn.One, // Editor column to show the new webview panel in.
                 {} // Webview options. More on these later.
             );
+            const currentFile = vscode.window.activeTextEditor?.document;
             
-            panel.webview.html = getWebviewContent();
+            let activeEditor = vscode.window.activeTextEditor;
+            let cursorPosition = activeEditor.selection.active;
+            panel.webview.html = await getWebviewContent(currentFile, cursorPosition);
         })
     );
 
