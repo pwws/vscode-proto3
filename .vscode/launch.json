@@ -7,7 +7,7 @@
             "type": "extensionHost",
             "request": "launch",
             "runtimeExecutable": "${execPath}",
-            "args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
+            "args": ["--extensionDevelopmentPath=${workspaceRoot}", "/Users/pawelwasowski/prog/monorepo/vscode_proto_ext/vscode-proto3"    ],
             "stopOnEntry": false,
             "sourceMaps": true,
             "outFiles": [ "${workspaceRoot}/out/src/**/*.js" ],

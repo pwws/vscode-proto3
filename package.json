@@ -21,7 +21,8 @@
   "activationEvents": [
     "onLanguage:proto3",
     "onCommand:proto3.compile.one",
-    "onCommand:proto3.compile.all"
+    "onCommand:proto3.compile.all",
+    "onCommand:proto3.explore"
   ],
   "main": "./out/src/proto3Main",
   "contributes": {
@@ -33,6 +34,10 @@
       {
         "command": "proto3.compile.all",
         "title": "proto3: Compile All Protos"
+      },
+      {
+        "command": "proto3.explore",
+        "title": "proto3: explore current message"
       }
     ],
     "languages": [

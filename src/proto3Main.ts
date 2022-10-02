@@ -11,6 +11,7 @@ import { PROTO3_MODE } from './proto3Mode';
 import { Proto3DefinitionProvider } from './proto3Definition';
 import { Proto3Configuration } from './proto3Configuration';
 import { Proto3DocumentSymbolProvider } from './proto3SymbolProvider';
+import { getWebviewContent } from './proto3Explore';
 
 export function activate(ctx: vscode.ExtensionContext): void {
 
@@ -45,6 +46,20 @@ export function activate(ctx: vscode.ExtensionContext): void {
         const compiler = new Proto3Compiler(workspaceFolder);
         compiler.compileAllProtos();
     }));
+
+    ctx.subscriptions.push(
+        vscode.commands.registerCommand('proto3.explore', () => {
+            // Create and show a new webview
+            const panel = vscode.window.createWebviewPanel(
+                'schemaExplorer', // Identifies the type of the webview. Used internally
+                'Schema explorer', // Title of the panel displayed to the user
+                vscode.ViewColumn.One, // Editor column to show the new webview panel in.
+                {} // Webview options. More on these later.
+            );
+            
+            panel.webview.html = getWebviewContent();
+        })
+    );
 
     //console.log('Congratulations, your extension "vscode-pb3" is now active!');
 
